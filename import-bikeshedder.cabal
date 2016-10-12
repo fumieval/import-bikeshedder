@@ -1,8 +1,8 @@
 name:                import-bikeshedder
 version:             0.1.0.0
-synopsis:            Initial project template from stack
+synopsis:            Bikeshed import orders
 description:         Please see README.md
-homepage:            https://github.com/githubuser/import-bikeshedder#readme
+homepage:            https://github.com/fumieval/import-bikeshedder#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Author name here
@@ -16,7 +16,7 @@ cabal-version:       >=1.10
 executable import-bikeshedder
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -O2
   build-depends:       base
                      , trifecta
                      , random
