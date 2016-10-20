@@ -107,9 +107,10 @@ loadGroupFun path = do
     Just gs <- parseFromFile (many parseGroup) path
     return $ \imp -> case imp ^? moduleName of
         Nothing -> 0
-        Just m -> case [p | (p, ps) <- gs, any (`isPrefixOf`m) ps] of
-            (p : _) -> p
-            _ -> 0
+        Just m -> case maximumByOf traverse (comparing fst)
+            [(length ps, p) | (p, ps) <- gs, any (`isPrefixOf`m) ps] of
+                Just (_, p) -> p
+                _ -> 0
 
 dispatch :: FilePath -> [String] -> [Import] -> IO [Import]
 dispatch path ("sortby" : spec : r) xs = do
