@@ -19,6 +19,7 @@ import Text.Trifecta
 import System.Random
 import Data.Hashable
 import GHC.Generics (Generic)
+import Debug.Trace
 
 data Import = Import
     Bool -- qualified
@@ -108,8 +109,8 @@ loadGroupFun path = do
     return $ \imp -> case imp ^? moduleName of
         Nothing -> 0
         Just m -> case maximumByOf traverse (comparing fst)
-            [(length ps, p) | (p, ps) <- gs, any (`isPrefixOf`m) ps] of
-                Just (_, p) -> p
+            [(length p, g) | (g, ps) <- gs, p <- filter (`isPrefixOf`m) ps] of
+                Just (_, g) -> g
                 _ -> 0
 
 dispatch :: FilePath -> [String] -> [Import] -> IO [Import]
